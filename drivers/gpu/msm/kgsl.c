@@ -334,7 +334,6 @@ kgsl_mem_entry_track_gpuaddr(struct kgsl_process_private *process,
 done:
 	return ret;
 }
-
 static void kgsl_mem_entry_commit_mem_list(struct kgsl_process_private *process,
 				struct kgsl_mem_entry *entry)
 {
