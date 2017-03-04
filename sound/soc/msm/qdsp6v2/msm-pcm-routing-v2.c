@@ -173,14 +173,6 @@ static void msm_pcm_routing_cfg_pp(int port_id, int copp_idx, int topology,
 					__func__, topology, port_id, rc);
 		}
 		break;
-#ifdef VENDOR_EDIT
-//#lifei@OnePlus.MultiMediaService, 2016/01/11 add set/get dsp interface
-    case ADM_CMD_COPP_OPEN_TOPOLOGY_ID_DIRAC:
-        pr_debug("%s: ADM_CMD_COPP_OPEN_TOPOLOGY_ID_DIRAC\n", __func__);
-        dirac_port_id = port_id;
-        dirac_copp_id = copp_idx;
-        break;
-#endif/*VENDOR_EDIT*/
 	default:
 		/* custom topology specific feature param handlers */
 		break;
