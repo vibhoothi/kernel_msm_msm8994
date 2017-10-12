@@ -70,8 +70,8 @@ ui_print "     BBBBBBBB             BBBBBBBB                ";
 ui_print "                                                  ";
 ui_print "--------------------------------------------------";
 ui_print "BlueBolt Kernel for ANDROID 8.0.0 Oreo";
-ui_print "Beta 3.0";
-ui_print "By -Shreyansh Lodha";
+ui_print "RC 3.0";
+ui_print "By - Shreyansh Lodha";
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
   ui_print "Checking device...";
