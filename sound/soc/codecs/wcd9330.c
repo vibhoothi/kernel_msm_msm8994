@@ -128,7 +128,7 @@ module_param(uhqa_mode_pdesireaudio, int,
 			S_IRUGO | S_IWUSR | S_IWGRP);
 MODULE_PARM_DESC(uhqa_mode_pdesireaudio, "PDesireAudio UHQA Audio output switch");
 
-static int pdesireaudio_static_mode;
+static int pdesireaudio_static_mode = 1;
 module_param(pdesireaudio_static_mode, int,
 			S_IRUGO | S_IWUSR | S_IWGRP);
 MODULE_PARM_DESC(pdesireaudio_static_mode, "Set PDesireAudio to static mode, so User can just control via kernelspace without changes due dynamic changes");
@@ -1315,11 +1315,7 @@ static int tomtom_config_compander(struct snd_soc_dapm_widget *w,
 		}
 		
 		/* PDesireAudio Compander Switch */
-		if (uhqa_mode_pdesireaudio) {
-			pr_debug("%s: PDesireAudio is enabled, do not enable compander\n",
-					__func__);
-			break; 
-		}
+		if (!uhqa_mode_pdesireaudio) {
 		
 			/* Set compander Sample rate */
 			snd_soc_update_bits(codec,
@@ -1335,7 +1331,7 @@ static int tomtom_config_compander(struct snd_soc_dapm_widget *w,
 					snd_soc_update_bits(codec,
 						TOMTOM_A_CDC_COMP0_B4_CTL + (comp * 8),
 						0x80, 0x80);
-			
+				}
 			}
 			
 			/* Enable RX interpolation path compander clocks */
@@ -3439,8 +3435,12 @@ static u8 tomtom_get_spkdrv_ocp_curr_limit_val(struct snd_soc_codec *codec,
 		break;
 	case WCD9XXX_SPKDRV_OCP_CURR_LIMIT_UNDEFINED:
 	default:
-		spkdrv_ocp_curr_limit_val =
-				WCD9330_SPKDRV_OCP_CURR_LIMIT_I_2P625_A;
+		if (!uhqa_mode_pdesireaudio)
+			spkdrv_ocp_curr_limit_val =
+					WCD9330_SPKDRV_OCP_CURR_LIMIT_I_2P625_A;
+		else
+			spkdrv_ocp_curr_limit_val =
+	                WCD9330_SPKDRV_OCP_CURR_LIMIT_I_5P625_A;
 		dev_dbg(codec->dev,
 			"%s: Invalid spkdrv_ocp_curr_limit, using default\n",
 			__func__);
