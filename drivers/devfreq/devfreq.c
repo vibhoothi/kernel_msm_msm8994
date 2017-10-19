@@ -26,6 +26,7 @@
 #include <linux/printk.h>
 #include <linux/hrtimer.h>
 #include <linux/fb.h>
+#include <linux/module.h>
 #include "governor.h"
 
 static struct class *devfreq_class;
@@ -51,6 +52,12 @@ static const char *boost_devices[] = {
 #define WAKE_BOOST_DURATION_MS (5000)
 static struct delayed_work wake_unboost_work;
 static struct work_struct wake_boost_work;
+
+bool boost_enabled = true;
+module_param(boost_enabled, bool, 0755);
+
+unsigned int boost_duration = 5000;
+module_param(boost_duration, uint, 0755);
 
 /**
  * find_device_devfreq() - find devfreq struct using device pointer
@@ -206,12 +213,13 @@ int update_devfreq(struct devfreq *devfreq)
 		return -EINVAL;
 
 	/* Reevaluate the proper frequency */
-	if (devfreq->do_wake_boost) {
+	if (devfreq->do_wake_boost && boost_enabled) {
 		/* Use the max freq when the screen is turned on */
 		freq = UINT_MAX;
+		pr_info("GPU Boosted");
 	} else {
 		err = devfreq->governor->get_target_freq(devfreq, &freq, &flags);
-		if (err)
+		if (err) 
 			return err;
 	}
 
@@ -1040,7 +1048,7 @@ static void wake_boost_fn(struct work_struct *work)
 {
 	set_wake_boost(true);
 	schedule_delayed_work(&wake_unboost_work,
-			msecs_to_jiffies(WAKE_BOOST_DURATION_MS));
+			msecs_to_jiffies(boost_duration));
 }
 
 static void wake_unboost_fn(struct work_struct *work)
