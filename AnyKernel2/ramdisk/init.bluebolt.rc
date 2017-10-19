@@ -85,10 +85,8 @@ on property:dev.bootcomplete=1
     write /sys/module/wakeup/parameters/enable_timerfd_ws 0
     write /sys/module/wakeup/parameters/enable_netlink_ws 0
     write /sys/module/wakeup/parameters/enable_netmgr_wl_ws 0
-	write /sys/module/wakeup/parameters/enable_nlp_wakelock_wl 0
 
     write /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster 1
-    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 6
 
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor chill
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
@@ -99,3 +97,5 @@ on property:dev.bootcomplete=1
     
     write /sys/modules/snd_soc_wcd9330/parameters/uhqa_mode_pdesireaudio 1
     write /sys/modules/snd_soc_wcd9330/parameters/pdesireaudio_static_mode 1
+    
+    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 6
