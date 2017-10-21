@@ -50,8 +50,6 @@ on property:persist.spectrum.profile=2
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 0
    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 6
    write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 3
-   write /sys/kernel/fp_boost/enabled 0
-   write /sys/kernel/screen_off/screen_off_max_freq 960000
 
 
 # Balance (default profile)
@@ -78,9 +76,7 @@ on property:persist.spectrum.profile=0
    write /sys/class/misc/btk_control/btkc_timeout 500
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 0
    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 6
-   write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 6
-   write /sys/kernel/fp_boost/enabled 1
-   write /sys/kernel/screen_off/screen_off_max_freq 1248000
+   write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 2
 
    
 # Performance 
@@ -110,8 +106,6 @@ on property:persist.spectrum.profile=1
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 1
    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 5
    write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 0
-   write /sys/kernel/fp_boost/enabled 1
-   write /sys/kernel/screen_off/screen_off_max_freq 1248000
 
 
 # Gaming
@@ -142,5 +136,3 @@ on property:persist.spectrum.profile=3
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 2
    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 5
    write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 0
-   write /sys/kernel/fp_boost/enabled 1
-   write /sys/kernel/screen_off/screen_off_max_freq 1248000
