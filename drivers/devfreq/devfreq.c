@@ -46,16 +46,16 @@ static DEFINE_MUTEX(devfreq_list_lock);
 
 /* List of devices to boost when the screen is woken */
 static const char *boost_devices[] = {
-	"qcom,cpubw.33",
+	"soc:qcom,cpubw",
 };
 
 static struct delayed_work wake_unboost_work;
 static struct work_struct wake_boost_work;
 
-bool boost_enabled = true;
+static bool boost_enabled = true;
 module_param(boost_enabled, bool, 0755);
 
-unsigned int boost_duration = 5000;
+static unsigned int boost_duration = 5000;
 module_param(boost_duration, uint, 0755);
 
 /**
