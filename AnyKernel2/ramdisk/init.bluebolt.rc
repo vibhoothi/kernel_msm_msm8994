@@ -99,4 +99,3 @@ on property:dev.bootcomplete=1
     write /sys/modules/snd_soc_wcd9330/parameters/pdesireaudio_static_mode 1
     
     write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 6
-    write /sys/kernel/fp_boost/enabled 0
