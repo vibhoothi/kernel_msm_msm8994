@@ -88,6 +88,6 @@ on property:dev.bootcomplete=1
     write /sys/modules/snd_soc_wcd9330/parameters/uhqa_mode_pdesireaudio 1
     write /sys/modules/snd_soc_wcd9330/parameters/pdesireaudio_static_mode 1
     
-    write /sys/class/kgsl/kgsl-3d0/devfreq/default_pwrlevel 7
+    write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 7
     
     write /sys/class/misc/boeffla_wakelock_blocker/wakelock_blocker IPA_WS;[timerfd];

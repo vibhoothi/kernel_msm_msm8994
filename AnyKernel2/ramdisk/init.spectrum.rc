@@ -48,7 +48,7 @@ on property:persist.spectrum.profile=2
    write /sys/block/mmcblk0/queue/scheduler noop
    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 0
-   write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 3
+   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 3
 
 
 # Balance (default profile)
@@ -74,7 +74,7 @@ on property:persist.spectrum.profile=0
    write /sys/class/misc/btk_control/btkc_mode 1
    write /sys/class/misc/btk_control/btkc_timeout 500
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 0
-   write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 2
+   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 2
 
    
 # Performance 
@@ -102,7 +102,7 @@ on property:persist.spectrum.profile=1
    write /sys/class/misc/btk_control/btkc_mode 1
    write /sys/class/misc/btk_control/btkc_timeout 1000
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 1
-   write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 0
+   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
 
 
 # Gaming
@@ -131,4 +131,4 @@ on property:persist.spectrum.profile=3
    write /sys/class/misc/btk_control/btkc_mode 0
    write /sys/class/misc/btk_control/btkc_timeout 0
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 2
-   write /sys/class/kgsl/kgsl-3d0/devfreq/max_pwrlevel 0
+   write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
