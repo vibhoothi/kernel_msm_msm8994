@@ -76,7 +76,7 @@ on property:persist.spectrum.profile=0
    write /sys/class/misc/btk_control/btkc_timeout 500
    write /sys/class/kgsl/kgsl-3d0/devfreq/adrenoboost 0
    write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 2
-   write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 8
+   write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 7
 
    
 # Performance 
