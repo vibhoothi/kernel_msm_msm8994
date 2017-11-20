@@ -1282,7 +1282,7 @@ uint8_t int_touch(void)
 	uint32_t finger_info = 0;
 
         if (ts_g == NULL)
-            return;
+            return finger_num;
         ts = ts_g;
 	memset(buf, 0, sizeof(buf));
 	points.x = 0;
@@ -1293,7 +1293,7 @@ uint8_t int_touch(void)
 	ret = synaptics_rmi4_i2c_read_block(ts->client, F12_2D_DATA_BASE, 80, buf);
 	if (ret < 0) {
 		TPD_ERR("synaptics_int_touch: i2c_transfer failed\n");
-		return;
+		return finger_num;
 	}
 	for( i = 0; i < ts->max_num; i++ ) {
 		points.status = buf[i*8];
