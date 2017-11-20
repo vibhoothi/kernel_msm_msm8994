@@ -195,6 +195,8 @@ static const struct dev_pm_ops synaptic_pm_ops = {
 #endif
 };
 
+extern bool s3320_touch_active(void);
+
 //add by jiachenghui for boot time optimize 2015-5-13
 #ifdef VENDOR_EDIT
 static int probe_ret;
@@ -761,7 +763,7 @@ static void synaptics_ts_report(struct synaptics_ts_data *ts )
 		btkc_touch_button();
 #endif
 #ifdef VENDOR_EDIT //WayneChang, 2015/12/29, add flag to enable virtual key
-	if(!virtual_key_enable)
+	if(!virtual_key_enable && !s3320_touch_active())
 		int_key(ts);
 	
 #else

@@ -494,10 +494,11 @@ struct synaptics_ts_data {
 	int double_enable;
 	int gesture_enable;
 	int glove_enable;
-    int changer_connet;
+	int changer_connet;
 	int is_suspended;
-    atomic_t is_stop;
-    spinlock_t lock;
+    	atomic_t is_stop;
+	spinlock_t lock;
+    	bool touch_active;
 
 	/********test*******/
 	int i2c_device_test;
@@ -1134,6 +1135,13 @@ static void synaptics_get_coordinate_point(struct synaptics_ts_data *ts)
 		(coordinate_buf[24] & 0x20) ? 0 : 2; // 1--clockwise, 0--anticlockwise, not circle, report 2
 }
 
+bool s3320_touch_active(void)
+{
+	struct synaptics_ts_data *ts = ts_g;
+
+	return ts ? ts->touch_active : false;
+}
+
 static void gesture_judge(struct synaptics_ts_data *ts)
 {
 	unsigned int keyCode = KEY_F4;
@@ -1263,7 +1271,7 @@ static void gesture_judge(struct synaptics_ts_data *ts)
 /***************end****************/
 static char prlog_count = 0;
 
-void int_touch(void)
+uint8_t int_touch(void)
 {
         struct synaptics_ts_data *ts;
 	int ret = -1,i = 0;
@@ -1356,6 +1364,7 @@ void int_touch(void)
 		gesture_judge(ts);
 	}
 #endif
+	return finger_num;
 }
 EXPORT_SYMBOL(int_touch);
 static void synaptics_ts_work_func(struct work_struct *work)
@@ -1383,7 +1392,8 @@ static void synaptics_ts_work_func(struct work_struct *work)
 		goto END;
 	}
 	if( inte & 0x04 ) {
-		int_touch();
+		uint8_t finger_num = int_touch();
+		ts->touch_active = finger_num;
 	}
 END:
     ret = set_changer_bit(ts);
@@ -3916,6 +3926,7 @@ static int fb_notifier_callback(struct notifier_block *self, unsigned long event
                 TPD_DEBUG("%s : going TP suspend\n", __func__);
                 synaptics_ts_suspend(&ts->client->dev);
                 ts->is_suspended = 1;
+                ts->touch_active = false;
             }
 		}
         else if( *blank == FB_BLANK_UNBLANK && (event == FB_EVENT_BLANK )) {
