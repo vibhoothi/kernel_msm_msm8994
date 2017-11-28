@@ -841,7 +841,6 @@ eNVChannelEnabledType vos_get_5g_bonded_channel_state(
 {
 	bool bw_enabled = false;
 	uint32_t flags;
-
 	if (CH_WIDTH_80MHZ < ch_width)
 		return NV_CHANNEL_INVALID;
 
