@@ -61,16 +61,6 @@ int msm_isp_axi_create_stream(
 	return 0;
 }
 
-void msm_isp_axi_destroy_stream(
-	struct msm_vfe_axi_shared_data *axi_data, int stream_idx)
-{
-	if (axi_data->stream_info[stream_idx].state != AVALIABLE) {
-		axi_data->stream_info[stream_idx].state = AVALIABLE;
-		axi_data->stream_info[stream_idx].stream_handle = 0;
-	} else {
-		pr_err("%s: stream does not exist\n", __func__);
-	}
-}
 
 int msm_isp_validate_axi_request(struct msm_vfe_axi_shared_data *axi_data,
 	struct msm_vfe_axi_stream_request_cmd *stream_cfg_cmd)
